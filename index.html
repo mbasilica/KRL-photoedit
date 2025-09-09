@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Photo Editor with Gemini</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/genai": "https://esm.run/@google/genai"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside id="sidebar">
+        <div class="sidebar-header">
+          <i class="fa-solid fa-rocket"></i>
+          <h1>Gemini SaaS</h1>
+        </div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li><a href="#"><i class="fa-solid fa-table-columns"></i><span>Dashboard</span></a></li>
+            <li class="active"><a href="#"><i class="fa-solid fa-pen-ruler"></i><span>Photo Editor</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-images"></i><span>My Gallery</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-sliders"></i><span>Settings</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-circle-info"></i><span>Help</span></a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="main-content">
+        <header id="app-header">
+          <div class="app-title">
+            <h1>AI Photo Editor</h1>
+            <p>Upload an image and tell the AI how to edit it.</p>
+          </div>
+        </header>
+        
+        <main class="container">
+          <div class="main-grid">
+            <div class="input-column">
+              <div class="image-box" id="image-container">
+                <div class="placeholder">
+                  <i class="fa-solid fa-image"></i>
+                  <p>Original image will appear here</p>
+                  <span>Drag & drop or upload an image</span>
+                </div>
+                <img id="original-image" alt="Original image" class="hidden" />
+              </div>
+              <section class="controls">
+                <div class="file-input-wrapper">
+                  <button id="upload-btn" class="button">
+                    <i class="fa-solid fa-upload"></i> Upload Image
+                  </button>
+                  <input type="file" id="file-input" accept="image/*" />
+                  <button id="camera-btn" class="button" title="Use Camera">
+                     <i class="fa-solid fa-camera"></i>
+                  </button>
+                </div>
+                <textarea
+                  id="prompt-input"
+                  placeholder="e.g., add a party hat, change the background to a beach..."
+                  aria-label="Editing prompt"
+                ></textarea>
+                <button id="generate-btn" class="button primary-action" disabled>
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
+                </button>
+              </section>
+            </div>
+            <div class="output-column">
+              <div class="image-box" id="result-container">
+                 <div class="placeholder">
+                  <i class="fa-solid fa-lightbulb"></i>
+                  <p>Edited image will appear here</p>
+                </div>
+                <div id="loader" class="loader hidden">
+                  <div class="spinner"></div>
+                  <p id="loader-text">Generating your image...</p>
+                </div>
+                <div id="image-blender" class="image-blender hidden">
+                  <img id="result-image-bg" alt="Original for blending" />
+                  <img id="result-image-fg" alt="Edited image" />
+                </div>
+                <p id="result-text"></p>
+              </div>
+              <div class="output-actions-wrapper">
+                <div class="history-controls">
+                  <button id="undo-btn" class="button" disabled title="Undo (Ctrl+Z)">
+                    <i class="fa-solid fa-rotate-left"></i> Undo
+                  </button>
+                  <button id="redo-btn" class="button" disabled title="Redo (Ctrl+Y)">
+                    <i class="fa-solid fa-rotate-right"></i> Redo
+                  </button>
+                </div>
+                <div id="blending-controls" class="blending-controls hidden">
+                    <span>Original</span>
+                    <input type="range" id="opacity-slider" min="0" max="100" value="100" title="Blend between original and edited image">
+                    <span>Edited</span>
+                </div>
+                <button id="download-btn" class="button primary-action" disabled>
+                    <i class="fa-solid fa-download"></i> Download Image
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="app-footer">
+          <p>&copy; 2024 Gemini SaaS. All Rights Reserved.</p>
+          <nav>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </nav>
+        </footer>
+      </div>
+    </div>
+    
+    <div id="camera-modal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <video id="camera-view" autoplay playsinline aria-label="Live camera feed"></video>
+        <canvas id="camera-canvas" class="hidden"></canvas>
+        <div class="modal-controls">
+          <button id="snap-btn" class="button primary-action">
+            <i class="fa-solid fa-camera-retro"></i> Snap Photo
+          </button>
+          <button id="cancel-camera-btn" class="button">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

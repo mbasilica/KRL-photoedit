@@ -1,0 +1,8 @@
+{
+  "name": "KRL Photo Editor",
+  "description": "Edit photos using text prompts with the Gemini API.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "prompt": ""
+}
