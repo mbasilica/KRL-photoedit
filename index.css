@@ -24,7 +24,9 @@ html {
 }
 
 body {
-  background: linear-gradient(to top, #417599 0%, #193a52 100%);
+  background-color: #04081a;
+  background-image: radial-gradient(circle at 10% 10%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 90% 80%, rgba(255, 20, 147, 0.1) 0%, transparent 50%);
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   margin: 0;
@@ -32,91 +34,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-smoothing: grayscale;
 }
-
-/* --- Cloud Animation --- */
-#clouds {
-	position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-	height: 100%;
-	overflow: hidden;
-    z-index: -1;
-}
-
-.cloud {
-	width: 200px; height: 60px;
-	background: #fff;
-	border-radius: 200px;
-	position: absolute;
-    opacity: 0.8;
-}
-
-.cloud:before, .cloud:after {
-	content: '';
-	position: absolute;
-	background: #fff;
-	width: 100px; height: 80px;
-	position: absolute; top: -15px; left: 10px;
-	border-radius: 100px;
-	transform: rotate(30deg);
-}
-
-.cloud:after {
-	width: 120px; height: 120px;
-	top: -55px; left: auto; right: 15px;
-}
-
-@keyframes animateCloud {
-	0% {
-		transform: translateX(-250px);
-	}
-	100% {
-		transform: translateX(calc(100vw + 250px));
-	}
-}
-
-.x1 {
-	top: 5%;
-	left: 0;
-	transform: scale(0.3);
-	animation: animateCloud 25s linear infinite;
-}
-
-.x2 {
-	top: 15%;
-	left: 0;
-	transform: scale(0.6);
-	animation: animateCloud 45s linear infinite;
-    animation-delay: -5s;
-}
-
-.x3 {
-	top: 35%;
-	left: 0;
-	transform: scale(0.4);
-	animation: animateCloud 30s linear infinite;
-    animation-delay: -10s;
-}
-
-.x4 {
-	top: 60%;
-	left: 0;
-	transform: scale(0.5);
-	animation: animateCloud 40s linear infinite;
-    animation-delay: -15s;
-}
-
-.x5 {
-	top: 75%;
-	left: 0;
-	transform: scale(0.45);
-	animation: animateCloud 28s linear infinite;
-    animation-delay: -20s;
-}
-
 
 /* --- New SaaS Layout --- */
 
